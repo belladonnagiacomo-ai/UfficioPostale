@@ -62,7 +62,7 @@
                 if (anni >= 65)
                 {
                     clientiSpid.Insert(clientiSpid.Count / 2, nome);
-                    foreach (string p in clientiSpedizioni)
+                    foreach (string p in clientiSpid)
                     {
                         Console.WriteLine("E stato aggiunto il cliente " + p + " alla lista spid");
                     }
@@ -71,7 +71,7 @@
                 else
                 {
                     clientiSpid.Add(nome);
-                    foreach (string p in clientiSpedizioni)
+                    foreach (string p in clientiSpid)
                     {
                         Console.WriteLine("E stato aggiunto il cliente " + p + " alla lista spid");
                     }
