@@ -245,6 +245,15 @@ namespace UfficioPostale
             Console.WriteLine();
 
         }
+        static void chiusuraSpid(List<string> clientiSpedizioni, List<string> clientiSpid, List<string> clientiFinanziaria)
+        {
+            Console.WriteLine("La coda Spid e chiusa e tutte le persone in coda verrano spostate nella coda Finanziaria");
+            for(int i = 0;i < clientiSpid.Count;i++)
+            {
+                clientiFinanziaria.Add(clientiSpid[i]);
+                clientiSpid.RemoveAt(i);
+            }
+        }
         static void Main(string[] args)
         {
             List<string> clientiSpedizioni = new List<string>();
@@ -261,6 +270,7 @@ namespace UfficioPostale
                 Console.WriteLine("3) Errore cliente");
                 Console.WriteLine("4) Panoramica");
                 Console.WriteLine("5) chiusura Spid");
+
                 int scelta = Convert.ToInt32(Console.ReadLine());
 
                 if(scelta == 1)
@@ -281,7 +291,7 @@ namespace UfficioPostale
                 }
                 else if(scelta == 5)
                 {
-
+                    chiusuraSpid(clientiSpedizioni, clientiSpid, clientiFinanziaria);
                 }
             }
         }
