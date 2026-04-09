@@ -88,7 +88,7 @@ namespace UfficioPostale
             
 
         }
-        static void Servizio(List<string> clientiSpedizioni, List<string> clientiSpid, List<string> clientiFinanziaria, ref int servitoSped,ref int servitoFin,ref int servitoSpid)
+        static void Servizio(List<string> clientiSpedizioni, List<string> clientiSpid, List<string> clientiFinanziaria, ref int servitoSped,ref int servitoFin,ref int servitoSpid, ref int sped, ref int fin, ref int spid)
         {
             Console.WriteLine("Quale settore vuoi servire");
             Console.WriteLine("1) Coda Spedizioni");
@@ -104,6 +104,7 @@ namespace UfficioPostale
             {
                 Console.WriteLine("Hai servito il cliente " + clientiSpedizioni[0] + " della lista spedizioni");
                 servitoSped++;
+                sped--;
                 clientiSpedizioni.RemoveAt(0);
                 
             }
@@ -115,6 +116,7 @@ namespace UfficioPostale
             {
                 Console.WriteLine("Hai servito il cliente " + clientiFinanziaria[0] + " della lista finanziaria");
                 servitoFin++;
+                fin--;
                 clientiFinanziaria.RemoveAt(0);
                
             }
@@ -126,6 +128,7 @@ namespace UfficioPostale
             {
                 Console.WriteLine("Hai servito il cliente " + clientiSpid[0] + " della lista spid");
                 servitoSpid++;
+                spid--;
                 clientiSpid.RemoveAt(0);
                 
             }
@@ -257,6 +260,7 @@ namespace UfficioPostale
                 Console.WriteLine("2) Servi cliente");
                 Console.WriteLine("3) Errore cliente");
                 Console.WriteLine("4) Panoramica");
+                Console.WriteLine("5) chiusura Spid");
                 int scelta = Convert.ToInt32(Console.ReadLine());
 
                 if(scelta == 1)
@@ -265,7 +269,7 @@ namespace UfficioPostale
                 }
                 else if(scelta == 2) 
                 {
-                    Servizio(clientiSpedizioni,clientiSpid,clientiFinanziaria, ref servitoSped, ref servitoFin, ref servitoSpid);
+                    Servizio(clientiSpedizioni,clientiSpid,clientiFinanziaria, ref servitoSped, ref servitoFin, ref servitoSpid, ref sped, ref fin, ref spid);
                 }
                 else if(scelta == 3)
                 {
@@ -274,6 +278,10 @@ namespace UfficioPostale
                 else if (scelta == 4)
                 {
                     panoramica(clientiSpedizioni, clientiSpid, clientiFinanziaria,ref sped,ref fin,ref spid,ref servitoSped,ref servitoFin,ref servitoSpid);
+                }
+                else if(scelta == 5)
+                {
+
                 }
             }
         }
