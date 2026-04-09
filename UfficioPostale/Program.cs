@@ -246,14 +246,16 @@ namespace UfficioPostale
             Console.WriteLine();
 
         }
-        static void chiusuraSpid(List<string> clientiSpedizioni, List<string> clientiSpid, List<string> clientiFinanziaria)
+        static void chiusuraSpid(List<string> clientiSpedizioni, List<string> clientiSpid, List<string> clientiFinanziaria, ref bool chiusuraS)
         {
             Console.WriteLine("La coda Spid e chiusa e tutte le persone in coda verrano spostate nella coda Finanziaria");
             for(int i = 0;i < clientiSpid.Count;i++)
             {
                 clientiFinanziaria.Add(clientiSpid[i]);
                 clientiSpid.RemoveAt(i);
+                
             }
+            chiusuraS = true;
         }
         static void PuliziaS(List<string> clientiSpedizioni, List<string> clientiSpid, List<string> clientiFinanziaria)
         {
@@ -322,7 +324,33 @@ namespace UfficioPostale
 
 
         }
+        static void chiusuraF(List<string> clientiSpedizioni, List<string> clientiSpid, List<string> clientiFinanziaria)
+        {
+            Console.WriteLine("Le poste stanno per chiudere, servi tutti i clienti");
+            for(int i = 0; i <  clientiSpedizioni.Count; i++)
+            {
+                clientiSpedizioni.Remove(clientiSpedizioni[i]);
+            }
+            Console.WriteLine();
+            Console.WriteLine("Hai servito tutta la coda spedizioni");
+            for (int i = 0; i < clientiFinanziaria.Count; i++)
+            {
+                clientiFinanziaria.Remove(clientiFinanziaria[i]);
+            }
+            Console.WriteLine();
+            Console.WriteLine("Hai servito tutta la coda finanziaria");
+            for (int i = 0; i < clientiSpid.Count; i++)
+            {
+                clientiSpid.Remove(clientiSpid[i]);
+            }
+            Console.WriteLine();
+            Console.WriteLine("Hai servito tutta la coda spid");
 
+            Console.WriteLine();
+            Console.WriteLine("Hai servito tutte le file");
+
+
+        }
         static void Main(string[] args)
         {
             List<string> clientiSpedizioni = new List<string>();
@@ -340,8 +368,9 @@ namespace UfficioPostale
                 Console.WriteLine("4) Panoramica");
                 Console.WriteLine("5) chiusura Spid");
                 Console.WriteLine("6) Pulizia sistema");
+                Console.WriteLine("7) chiusura");
                 int scelta = Convert.ToInt32(Console.ReadLine());
-
+                bool chiusuraS = false; ;
                 if(scelta == 1)
                 {
                     Accettazione(clientiSpedizioni, clientiSpid, clientiFinanziaria, ref sped, ref fin, ref spid);
@@ -360,11 +389,16 @@ namespace UfficioPostale
                 }
                 else if(scelta == 5)
                 {
-                    chiusuraSpid(clientiSpedizioni, clientiSpid, clientiFinanziaria);
+                    chiusuraSpid(clientiSpedizioni, clientiSpid, clientiFinanziaria, ref chiusuraS);
                 }
                 else if(scelta == 6)
                 {
-
+                    PuliziaS(clientiSpedizioni, clientiSpid, clientiFinanziaria);
+                }
+                else if(scelta == 7)
+                {
+                    chiusuraF(clientiSpedizioni, clientiSpid, clientiFinanziaria);
+                    chiusura = true;
                 }
             }
         }
