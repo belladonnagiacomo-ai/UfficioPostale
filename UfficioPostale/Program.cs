@@ -89,7 +89,7 @@ namespace UfficioPostale
             
 
         }
-        static void Servizio(List<string> clientiSpedizioni, List<string> clientiSpid, List<string> clientiFinanziaria, ref int servitoSped,ref int servitoFin,ref int servitoSpid, ref int sped, ref int fin, ref int spid)
+        static void Servizio(List<string> clientiSpedizioni, List<string> clientiSpid, List<string> clientiFinanziaria, ref int servitoSped,ref int servitoFin,ref int servitoSpid, ref int sped, ref int fin, ref int spid, ref bool chiusuraS)
         {
             Console.WriteLine("Quale settore vuoi servire");
             Console.WriteLine("1) Coda Spedizioni");
@@ -121,18 +121,24 @@ namespace UfficioPostale
                 clientiFinanziaria.RemoveAt(0);
                
             }
-            else if(servizio == 3 && clientiSpid.Count == 0)
+            if (chiusuraS == true)
             {
-                Console.WriteLine("non c'è nessuno da servire");
+                Console.WriteLine("La coda Spid e chiusa");
             }
-            else if(servizio == 3 && clientiSpid.Count != 0)
+            else if (servizio == 3 && clientiSpid.Count == 0)
             {
-                Console.WriteLine("Hai servito il cliente " + clientiSpid[0] + " della lista spid");
-                servitoSpid++;
-                spid--;
-                clientiSpid.RemoveAt(0);
-                
+                    Console.WriteLine("non c'è nessuno da servire");
             }
+            else if (servizio == 3 && clientiSpid.Count != 0)
+            {
+                    Console.WriteLine("Hai servito il cliente " + clientiSpid[0] + " della lista spid");
+                    servitoSpid++;
+                    spid--;
+                    clientiSpid.RemoveAt(0);
+
+            }
+            
+            
         }
 
         static void errore(List<string> clientiSpedizioni, List<string> clientiSpid, List<string> clientiFinanziaria)
@@ -377,7 +383,7 @@ namespace UfficioPostale
                 }
                 else if(scelta == 2) 
                 {
-                    Servizio(clientiSpedizioni,clientiSpid,clientiFinanziaria, ref servitoSped, ref servitoFin, ref servitoSpid, ref sped, ref fin, ref spid);
+                    Servizio(clientiSpedizioni,clientiSpid,clientiFinanziaria, ref servitoSped, ref servitoFin, ref servitoSpid, ref sped, ref fin, ref spid, ref chiusuraS);
                 }
                 else if(scelta == 3)
                 {
