@@ -5,7 +5,7 @@ namespace UfficioPostale
 {
     internal class Program
     {
-        static void Accettazione(List<string> clientiSpedizioni, List<string> clientiSpid, List<string> clientiFinanziaria, int sped = 0, int fin = 0, int spid = 0)
+        static void Accettazione(List<string> clientiSpedizioni, List<string> clientiSpid, List<string> clientiFinanziaria, ref int sped, ref int fin, ref int spid)
         {
             Console.WriteLine("Dimmi il tuo nome");
             Console.WriteLine();
@@ -88,7 +88,7 @@ namespace UfficioPostale
             
 
         }
-        static void Servizio(List<string> clientiSpedizioni, List<string> clientiSpid, List<string> clientiFinanziaria, int servitoSped = 0, int servitoFin = 0, int servitoSpid = 0)
+        static void Servizio(List<string> clientiSpedizioni, List<string> clientiSpid, List<string> clientiFinanziaria, ref int servitoSped,ref int servitoFin,ref int servitoSpid)
         {
             Console.WriteLine("Quale settore vuoi servire");
             Console.WriteLine("1) Coda Spedizioni");
@@ -206,7 +206,7 @@ namespace UfficioPostale
             }
 
         }
-        static void panoramica(List<string> clientiSpedizioni, List<string> clientiSpid, List<string> clientiFinanziaria, int sped, int fin, int spid, int servitoSped, int servitoFin, int servitoSpid)
+        static void panoramica(List<string> clientiSpedizioni, List<string> clientiSpid, List<string> clientiFinanziaria, ref int sped, ref int fin, ref int spid, ref int servitoSped, ref int servitoFin, ref int servitoSpid)
         {
             Console.WriteLine("Persone in attesa nella coda spedizioni: " + sped);
             Console.WriteLine();
@@ -261,11 +261,11 @@ namespace UfficioPostale
 
                 if(scelta == 1)
                 {
-                    Accettazione(clientiSpedizioni, clientiSpid, clientiFinanziaria);
+                    Accettazione(clientiSpedizioni, clientiSpid, clientiFinanziaria, ref sped, ref fin, ref spid);
                 }
                 else if(scelta == 2) 
                 {
-                    Servizio(clientiSpedizioni,clientiSpid,clientiFinanziaria);
+                    Servizio(clientiSpedizioni,clientiSpid,clientiFinanziaria, ref servitoSped, ref servitoFin, ref servitoSpid);
                 }
                 else if(scelta == 3)
                 {
@@ -273,7 +273,7 @@ namespace UfficioPostale
                 }
                 else if (scelta == 4)
                 {
-                    panoramica(clientiSpedizioni, clientiSpid, clientiFinanziaria,sped,fin,spid,servitoSped,servitoFin,servitoSpid);
+                    panoramica(clientiSpedizioni, clientiSpid, clientiFinanziaria,ref sped,ref fin,ref spid,ref servitoSped,ref servitoFin,ref servitoSpid);
                 }
             }
         }
