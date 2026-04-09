@@ -1,4 +1,5 @@
 ﻿using System.Runtime.CompilerServices;
+using System.Security.Permissions;
 using System.Xml.XPath;
 
 namespace UfficioPostale
@@ -254,6 +255,74 @@ namespace UfficioPostale
                 clientiSpid.RemoveAt(i);
             }
         }
+        static void PuliziaS(List<string> clientiSpedizioni, List<string> clientiSpid, List<string> clientiFinanziaria)
+        {
+            char[] alfabeto = { 'a', 'b', 'c', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm', 'n', 'o', 'p', 'q', 'r', 's', 't', 'u', 'v', 'w', 'x', 'y', 'z' };
+            bool trovato = false;
+            for(int i = clientiSpedizioni.Count - 1;i >= 0;i--)
+            {
+                for(int j = 0; j < clientiSpedizioni[i].Length; j++)
+                {
+                    for(int k = 0; k < alfabeto.Length; k++)
+                    {
+                        if (clientiSpedizioni[i][j] != alfabeto[k])
+                        {
+                            trovato = true;
+                           
+                        }
+                    }
+                }
+                if (trovato == true)
+                {
+                    clientiSpedizioni.Remove(clientiSpedizioni[i]);
+                }
+                trovato = false;
+            
+            }
+            for (int i = clientiFinanziaria.Count - 1; i >= 0; i--)
+            {
+                for (int j = 0; j < clientiFinanziaria[i].Length; j++)
+                {
+                    for (int k = 0; k < alfabeto.Length; k++)
+                    {
+                        if (clientiFinanziaria[i][j] != alfabeto[k])
+                        {
+                            trovato = true;
+
+                        }
+                    }
+                }
+                if (trovato == true)
+                {
+                    clientiFinanziaria.Remove(clientiFinanziaria[i]);
+                }
+                trovato = false;
+
+            }
+            for (int i = clientiSpid.Count - 1; i >= 0; i--)
+            {
+                for (int j = 0; j < clientiSpid[i].Length; j++)
+                {
+                    for (int k = 0; k < alfabeto.Length; k++)
+                    {
+                        if (clientiSpid[i][j] != alfabeto[k])
+                        {
+                            trovato = true;
+
+                        }
+                    }
+                }
+                if (trovato == true)
+                {
+                    clientiSpid.Remove(clientiSpid[i]);
+                }
+                trovato = false;
+
+            }
+
+
+        }
+
         static void Main(string[] args)
         {
             List<string> clientiSpedizioni = new List<string>();
@@ -270,7 +339,7 @@ namespace UfficioPostale
                 Console.WriteLine("3) Errore cliente");
                 Console.WriteLine("4) Panoramica");
                 Console.WriteLine("5) chiusura Spid");
-
+                Console.WriteLine("6) Pulizia sistema");
                 int scelta = Convert.ToInt32(Console.ReadLine());
 
                 if(scelta == 1)
@@ -292,6 +361,10 @@ namespace UfficioPostale
                 else if(scelta == 5)
                 {
                     chiusuraSpid(clientiSpedizioni, clientiSpid, clientiFinanziaria);
+                }
+                else if(scelta == 6)
+                {
+
                 }
             }
         }
